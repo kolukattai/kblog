@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/kolukattai/kblog/global"
 	"github.com/kolukattai/kblog/parser"
@@ -54,7 +55,6 @@ func generatePages() {
 	wg.Add(len(dir))
 	for {
 		res, ok := <-files
-		fmt.Println("OK", ok)
 		if !ok {
 			break
 		}
@@ -80,7 +80,6 @@ func copyAssets(path string) {
 		log.Fatal(err.Error())
 	}
 	for _, file := range files {
-		fmt.Println(file.Name(), file.IsDir())
 		dirPath := path + "/" + file.Name()
 		if file.IsDir() {
 			_ = os.MkdirAll("dist/"+dirPath, os.ModePerm)
@@ -94,7 +93,9 @@ func copyAssets(path string) {
 }
 
 func Exec() {
+	t := time.Now()
 	generatePages()
 	copyAssets("static")
-	fmt.Println("build completed...")
+	d := time.Since(t)
+	fmt.Printf("build completed in %vs\n", d.Seconds())
 }

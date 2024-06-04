@@ -5,13 +5,8 @@ package cmd
 
 import (
 	"fmt"
-	"log"
-	"net/http"
-	"os"
-	"strings"
 
-	"github.com/kolukattai/kblog/global"
-	"github.com/kolukattai/kblog/parser"
+	"github.com/kolukattai/kblog/server"
 	"github.com/spf13/cobra"
 )
 
@@ -30,44 +25,7 @@ to quickly create a Cobra application.`,
 
 		port, _ := cmd.Flags().GetString("port")
 
-		path := "."
-
-		if len(args) > 0 {
-			path = args[0]
-		}
-
-		_, err := os.ReadDir(path)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		var staticFS = http.FS(global.StaticFiles)
-		fs := http.FileServer(staticFS)
-
-		http.Handle("/static/", fs)
-
-		http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.WriteHeader(200)
-			path := r.URL.Path[1:]
-			fmt.Println("PATH", path, len(path))
-			if len(path) == 0 {
-				w.Write([]byte("home.Home()"))
-				return
-			}
-			if strings.Index(path, "posts") == 0 {
-				val := parser.Parse(strings.Replace(path, "posts/", "", 1), parser.Options{
-					LandingImage: true,
-					Tags:         true,
-					Author:       true,
-					Config:       global.Config,
-				})
-				w.Write([]byte(val))
-				return
-			}
-			w.Write([]byte("var"))
-		}))
-		fmt.Printf("application stated at http://localhost:%s\n", port)
-		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
+		server.Run(port)
 	},
 }
 
