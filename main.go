@@ -25,7 +25,7 @@ func init() {
 
 	confFile, err := os.ReadFile("config.yaml")
 	if err != nil {
-		panic(err)
+		_ = os.WriteFile("config.yaml", []byte(""), 0666)
 	}
 	var conf models.Config
 	if err := yaml.Unmarshal(confFile, &conf); err != nil {
