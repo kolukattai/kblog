@@ -1,7 +1,15 @@
 package components
 
-import "fmt"
+import (
+	"fmt"
 
-func Img(alt, src string) string {
-	return fmt.Sprintf("<img src='%s' alt='%s'/>", src, alt)
+	"github.com/kolukattai/kblog/models"
+)
+
+func Img(alt, src string) models.Component {
+	if len(src) != 0 {
+		return models.Component(fmt.Sprintf("<img src='%s' alt='%s'/>", src, alt))
+	} else {
+		return models.Component("")
+	}
 }

@@ -1,0 +1,13 @@
+package boot
+
+
+func InitTags() {
+	
+}
+
+
+
+
+
+
+

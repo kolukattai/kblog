@@ -9,6 +9,10 @@ html, body {
     padding: 0px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    margin: 0px;
+}
 
 .container {
     max-width: 750px;
@@ -84,6 +88,11 @@ a.tag:hover {
 .tags {
     display: flex;
     flex-wrap: wrap;
+}
+
+a.card-item {
+    border: none;
+    color: #000;
 }
 
 @media only screen and (max-width: 500px) {

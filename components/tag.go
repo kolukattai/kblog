@@ -1,21 +1,19 @@
 package components
 
-import "fmt"
+import (
+	"fmt"
 
+	"github.com/kolukattai/kblog/models"
+)
 
-
-func Tag(tag string) string {
-	return fmt.Sprintf("<a class='tag' href='/tag/%s'>#%s</a>", tag, tag)
+func Tag(tag string) models.Component {
+	return models.Component(fmt.Sprintf("<a class='tag' href='/tag/%s'>#%s</a>", tag, tag))
 }
 
-func Tags(tags []string) string {
+func Tags(tags []string) models.Component {
 	result := "<div class='tags'>"
 	for _, tag := range tags {
-		result += Tag(tag)
+		result += string(Tag(string(tag)))
 	}
-	return result + "</div>"
+	return models.Component(result + "</div>")
 }
-
-
-
-

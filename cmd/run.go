@@ -6,6 +6,8 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/kolukattai/kblog/boot"
+	"github.com/kolukattai/kblog/global"
 	"github.com/kolukattai/kblog/server"
 	"github.com/spf13/cobra"
 )
@@ -24,6 +26,10 @@ to quickly create a Cobra application.`,
 		fmt.Println("running blog")
 
 		port, _ := cmd.Flags().GetString("port")
+
+		boot.InitMetaData()
+
+		fmt.Println(global.PageDataList)
 
 		server.Run(port)
 	},

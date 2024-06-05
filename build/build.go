@@ -1,6 +1,7 @@
 package build
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/fs"
 	"log"
@@ -10,26 +11,33 @@ import (
 	"time"
 
 	"github.com/kolukattai/kblog/global"
+	"github.com/kolukattai/kblog/models"
 	"github.com/kolukattai/kblog/parser"
+	"github.com/kolukattai/kblog/util"
 )
 
 type pageData struct {
-	Name string
-	Data string
+	Name     string           `json:"name"`
+	Data     string           `json:"data"`
+	Slug     string           `json:"slug"`
+	MetaData *models.PageData `json:"metaData"`
 }
 
 func Parse(name string, c chan pageData, wg *sync.WaitGroup) {
 	defer wg.Done()
+	data, metaData := parser.Parse(
+		name, parser.Options{
+			LandingImage: true,
+			Tags:         true,
+			Author:       true,
+			Config:       global.Config,
+		},
+	)
 	c <- pageData{
-		Name: name,
-		Data: parser.Parse(
-			name, parser.Options{
-				LandingImage: true,
-				Tags:         true,
-				Author:       true,
-				Config:       global.Config,
-			},
-		),
+		Name:     name,
+		Data:     data,
+		Slug:     strings.ReplaceAll(name, " ", "-"),
+		MetaData: metaData,
 	}
 }
 
@@ -50,7 +58,12 @@ func generatePages() {
 	}
 	wg.Wait()
 	close(files)
+
 	fmt.Println("parsing completed...")
+
+	tags := []string{}
+	categoryes := []string{}
+	siteData := []pageData{}
 
 	wg.Add(len(dir))
 	for {
@@ -58,6 +71,11 @@ func generatePages() {
 		if !ok {
 			break
 		}
+		tags = append(tags, strings.Split(res.MetaData.Tags, ",")...)
+		categoryes = append(categoryes, res.MetaData.Category)
+		sd := res
+		sd.Data = ""
+		siteData = append(siteData, sd)
 		go func(f pageData, wg *sync.WaitGroup) {
 			defer wg.Done()
 			err := os.MkdirAll(fmt.Sprintf("dist/posts/%s", f.Name), os.ModePerm)
@@ -72,6 +90,26 @@ func generatePages() {
 	}
 
 	wg.Wait()
+
+	tags = util.RemoveDuplicate(tags)
+	categoryes = util.RemoveDuplicate(categoryes)
+
+	siteDataID := fmt.Sprintf("%v-site.json", time.Now().Nanosecond())
+
+	siteDataByte, _ := json.Marshal(siteData)
+
+	_ = os.MkdirAll("dist/data", os.ModePerm)
+
+	_ = os.WriteFile(fmt.Sprintf("dist/data/%v", siteDataID), siteDataByte, 0666)
+
+	indexPageData := parser.ParseData("")
+	if err = os.WriteFile("dist/index.html", []byte(indexPageData), 0666); err != nil {
+		panic(err)
+	}
+}
+
+func searchData(data []pageData) {
+	
 }
 
 func copyAssets(path string) {

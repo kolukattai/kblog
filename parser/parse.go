@@ -19,18 +19,27 @@ type Options struct {
 	Config       *models.Config
 }
 
-func Parse(fileName string, options Options) string {
+func Parse(fileName string, options Options) (string, *models.PageData) {
 	postByte, err := os.ReadFile(fmt.Sprintf("posts/%s.md", fileName))
 	if err != nil {
 		panic(err)
 	}
 
-	pageDataArr := strings.Split(string(postByte), "---")
+	pageMetaData := ""
+	pageContent := ""
 
-	st := util.HtmlTemplate(ParseData(pageDataArr[2]), global.TemplateFolder)
+	pageDataArr := strings.Split(string(postByte), "---")
+	if len(pageDataArr) == 3 {
+		pageContent = pageDataArr[2]
+	}
+
+	st := util.HtmlTemplate(ParseData(pageContent), global.TemplateFolder)
 
 	metaData := models.PageData{}
-	err = yaml.Unmarshal([]byte(pageDataArr[1]), &metaData)
+	if len(pageDataArr) == 3 {
+		pageMetaData = pageDataArr[1]
+	}
+	err = yaml.Unmarshal([]byte(pageMetaData), &metaData)
 	if err != nil {
 		panic(err)
 	}
@@ -39,21 +48,24 @@ func Parse(fileName string, options Options) string {
 		st.PopulateString(strings.ToLower(key), fmt.Sprintf("%v", value))
 	})
 
-	if options.LandingImage {
-		st.PopulateString("_landingImage", components.Img("landing image", metaData.LandingImage))
+	landingImage := components.Img("landing image", metaData.LandingImage)
+	if len(landingImage) > 0 {
+		st.PopulateComponent("_landingImage", landingImage)
 	}
-	if options.Tags {
-		st.PopulateString("_tags", components.Tags(metaData.GetTags()))
+
+	tags := components.Tags(metaData.GetTags())
+	if len(tags) > 0 {
+		st.PopulateComponent("_tags", tags)
 	}
 
 	st.PopulateString("ga_id", options.Config.GoogleAnalytics)
 
-	return st.Result()
+	return st.Result(), &metaData
 }
 
 func ParseData(data string) string {
 
-	st := util.HtmlTemplate("{{main}}", global.TemplateFolder).
+	st := util.HtmlTemplate("<!--{{main}}-->", global.TemplateFolder).
 		PopulateHTML("main", "templates/base.html").
 		PopulateHTML("_header", "templates/header.html").
 		PopulateHTML("_footer", "templates/footer.html").
@@ -61,4 +73,20 @@ func ParseData(data string) string {
 		PopulateMarkdown("_content", data)
 
 	return st.Result()
+}
+
+func ParsePageMetaData(page string) models.PageData {
+	pageMetaData := ""
+
+	pageDataArr := strings.Split(page, "---")
+
+	metaData := models.PageData{}
+	if len(pageDataArr) == 3 {
+		pageMetaData = pageDataArr[1]
+	}
+	err := yaml.Unmarshal([]byte(pageMetaData), &metaData)
+	if err != nil {
+		panic(err)
+	}
+	return metaData
 }

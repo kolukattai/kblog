@@ -12,8 +12,9 @@ func Run(port string) {
 	var staticFS = http.FS(global.StaticFiles)
 	fs := http.FileServer(staticFS)
 
-	http.Handle("/static/", fs)
 
+	http.Handle("/", handleHome())
+	http.Handle("GET /static/", fs)
 	http.Handle("GET /posts/{file}", handlePosts())
 
 	fmt.Printf("application stated at http://localhost:%s\n", port)

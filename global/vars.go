@@ -12,4 +12,7 @@ var (
 
 	// config
 	Config *models.Config
+
+	// runtime data
+	PageDataList = &models.PageDataList{}
 )
