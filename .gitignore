@@ -3,3 +3,5 @@ config.yaml
 posts/
 css/
 js/
+temp/
+public/

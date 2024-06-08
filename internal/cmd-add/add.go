@@ -18,7 +18,7 @@ func Create(title string) {
 		Title:        cTitle,
 		Description:  "this is post description",
 		Keywords:     "one, two, three",
-		Tags:         "one, two, three",
+		Tags:         []string{"one", "two", "three"},
 		Category:     "Technology",
 		Author:       "<your name>",
 		LandingImage: "https://miro.medium.com/v2/resize:fit:2000/format:webp/0*RZU7fFE4BbyEFBzX",

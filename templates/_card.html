@@ -1,10 +1,11 @@
 {{define "card"}}
 
     <div class="post">
+        <img src="{{.LandingImage}}" alt="landing img">
         <h1>{{.Title}}</h1>
         <div class="tags">
-            {{range split .Tags ","}}
-                <a href="#" class="/tag/{{.}}">{{.}}</a>
+            {{range  .Tags}}
+                <a class="tag" href="/tag/{{.}}">{{.}}</a>
             {{end}}
         </div>
     </div>

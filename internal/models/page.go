@@ -2,17 +2,17 @@ package models
 
 import (
 	"encoding/json"
-	"strings"
 )
 
 type PageType string
 
 const (
-	PageTypePost      PageType = "_post"
-	PageTypeTag       PageType = "_tag"
-	PageTypeTags      PageType = "_tags"
-	PageTypeCategory  PageType = "_category"
-	PageTypeCategorys PageType = "_categorys"
+	PageTypePost       PageType = "_post"
+	PageTypeTag        PageType = "_tag"
+	PageTypeTags       PageType = "_tags"
+	PageTypeCategory   PageType = "_category"
+	PageTypeCategories PageType = "_categories"
+	PageTypeHome       PageType = "home"
 )
 
 type SlimPageData struct {
@@ -65,17 +65,13 @@ func (s *PageDataList) GetJSON() string {
 }
 
 type PageData struct {
-	Title        string `yaml:"title" json:"title"`
-	Description  string `yaml:"description" json:"description"`
-	Keywords     string `yaml:"keywords" json:"keywords"`
-	Tags         string `yaml:"tags" json:"tags"`
-	Category     string `yaml:"category" json:"category"`
-	Author       string `yaml:"author" json:"author"`
-	LandingImage string `yaml:"landingImage" json:"landingImage"`
-	Date         string `yaml:"date" json:"date"`
-	Slug         string `json:"slug,omitempty"`
-}
-
-func (st *PageData) GetTags() []string {
-	return strings.Split(strings.ReplaceAll(st.Tags, " ", ""), ",")
+	Title        string   `yaml:"title" json:"title"`
+	Description  string   `yaml:"description" json:"description"`
+	Keywords     string   `yaml:"keywords" json:"keywords"`
+	Tags         []string `yaml:"tags" json:"tags"`
+	Category     string   `yaml:"category" json:"category"`
+	Author       string   `yaml:"author" json:"author"`
+	LandingImage string   `yaml:"landingImage" json:"landingImage"`
+	Date         string   `yaml:"date" json:"date"`
+	Slug         string   `yaml:"-" json:"slug,omitempty"`
 }

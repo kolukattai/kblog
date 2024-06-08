@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/kolukattai/kblog/internal/global"
 	"github.com/kolukattai/kblog/internal/models"
 	"gopkg.in/yaml.v3"
 )
@@ -16,6 +17,7 @@ type htmlTemplate struct {
 	templ    *template.Template
 	result   *bytes.Buffer
 	metaData *models.PageData
+	fileType models.PageType
 }
 
 func HtmlTemplate(folder embed.FS, fileType models.PageType, files ...string) *htmlTemplate {
@@ -38,12 +40,10 @@ func HtmlTemplate(folder embed.FS, fileType models.PageType, files ...string) *h
 	if err != nil {
 		Error(err.Error())
 	}
-	return &htmlTemplate{templ: tmpl.Funcs(template.FuncMap{
-		"split": splitString,
-	})}
+	return &htmlTemplate{templ: tmpl, fileType: fileType}
 }
 
-func (st *htmlTemplate) MdData(post string, data any) *htmlTemplate {
+func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *htmlTemplate {
 	val, err := os.ReadFile(fmt.Sprintf("posts/%s.md", post))
 	if err != nil {
 		val = []byte("")
@@ -69,11 +69,20 @@ func (st *htmlTemplate) MdData(post string, data any) *htmlTemplate {
 
 	var result bytes.Buffer
 
-	err = st.templ.Execute(&result, models.MDPageData{
-		Content:  string(pageContent),
-		MetaData: mData,
-		Data:     data,
-	})
+	fmt.Println(global.Categories)
+
+	err = st.templ.
+		Execute(&result, models.MDPageData{
+			Content:         string(pageContent),
+			MetaData:        mData,
+			Data:            data,
+			DefaultMetaData: conf,
+			PageType:        st.fileType,
+			Global: struct{Tags []string; Catagories []string}{
+				Tags: global.Tags,
+				Catagories: global.Categories,
+			},
+		})
 	if err != nil {
 		Error(err.Error())
 	}

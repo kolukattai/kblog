@@ -11,4 +11,5 @@ type Config struct {
 	GoogleAnalytics string   `yaml:"ga"`
 	Styles          []string `yaml:"styles"`
 	Scripts         []string `yaml:"scripts"`
+	PerPage         int      `yaml:"perPage"`
 }

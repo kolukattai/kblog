@@ -1,0 +1,40 @@
+{{define "aside1"}}
+
+<aside class="aside1">
+    <div class="content">
+        <h1>Tags</h1>
+        <ul>
+            {{range .Global.Tags}}
+                <li><a href="/tag/{{.}}">#{{.}}</a></li>
+            {{end}}
+        </ul>
+        
+        <h1>Categories</h1>
+        <ul>
+            {{range .Global.Catagories}}
+                <li><a href="/cateogry/{{.}}">{{.}}</a></li>
+            {{end}}
+        </ul>
+
+        <h1>Share</h1>
+        <ul>
+            <li>
+                <a title="instagram" href="#" target="_blank" class="icon"><img src="/static/icons/instagram.svg" alt="instagram"></a>
+                <a title="copy" href="#" class="icon"><img src="/static/icons/copy.svg" height="24" alt="instagram"></a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+{{end}}
+
+
+
+{{define "aside2"}}
+
+<aside class="aside2">
+   
+</aside>
+
+{{end}}
+

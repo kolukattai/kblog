@@ -16,7 +16,7 @@ func splitPage(prefix, template string, index int, posts *models.PageDataList, c
 
 	count := index * perPage
 
-	for i := 0; i <= perPage; i++ {
+	for i := 0; i < perPage; i++ {
 		idx := i + count
 		da := posts.Get(idx)
 		if da == nil {
@@ -33,7 +33,9 @@ func InitJavascriptMaps(posts *models.PageDataList, perPage int) {
 	prefix := fmt.Sprintf("%v", time.Now().Nanosecond())
 	siteData := "%v-site-data-%v.json"
 
-	s := &models.JavaScript{}
+	s := &models.JavaScript{
+		SiteData: map[string]*models.PageDataList{},
+	}
 
 	// files := []string{}
 	partition := posts.Length() / perPage
@@ -60,7 +62,9 @@ func InitJavascriptMaps(posts *models.PageDataList, perPage int) {
 		if !ok {
 			break
 		}
-		s.SiteData = append(s.SiteData, file)
+		d := &models.PageDataList{}
+		d.ReplaceData(file.Value)
+		s.SiteData[file.Key] = d
 		s.SiteDataFiles = append(s.SiteDataFiles, file.Key)
 	}
 

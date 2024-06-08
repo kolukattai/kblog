@@ -50,6 +50,8 @@ func InitSiteData() {
 	close(c)
 
 	pageDataList := []*models.PageData{}
+	tags := []string{}
+	categories := []string{}
 
 	for {
 		res, ok := <-c
@@ -57,7 +59,12 @@ func InitSiteData() {
 			break
 		}
 		pageDataList = append(pageDataList, &res)
+		tags = append(tags, res.Tags...)
+		categories = append(categories, res.Category)
 	}
+
+	global.Categories = util.RemoveDuplicate(categories)
+	global.Tags = util.RemoveDuplicate(tags)
 
 	sortedPageDataList := util.SortArray(pageDataList, func(left, right *models.PageData) bool {
 		l, _ := time.Parse(time.RFC1123, left.Date)

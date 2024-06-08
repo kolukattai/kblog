@@ -10,9 +10,15 @@
     {{block "header" .}}{{end}}
 
     <main>
-        {{block "content" .}}{{end}}
+        {{block "aside1" .}}{{end}}
+        {{block "aside2" .}}{{end}}
+        <div class="content">
+            {{block "content" .}}{{end}}
+        </div>
     </main>
 
     {{block "footer" .}}{{end}}
+
+    {{block "scripts" .}}{{end}}
 </body>
 </html>

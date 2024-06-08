@@ -17,5 +17,8 @@ var (
 	PageDataList = &models.PageDataList{}
 
 	// static file paths
-	JavaScriptLocation *models.JavaScript
+	JavaScriptLocation = &models.JavaScript{}
+
+	Tags       = []string{}
+	Categories = []string{}
 )

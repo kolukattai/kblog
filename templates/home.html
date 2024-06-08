@@ -1,13 +1,20 @@
 
 
 {{define "content"}}
-<div class="posts">
+    <div class="container" id="container">
+        
+        {{range .Data}}
+            {{block "card" .}}{{end}}
+        {{end}}
 
-    {{range .Data}}
-        {{block "card" .}}{{end}}
-    {{end}}
+        <div id="view"></div>
+    </div>
 
-</div>
+    {{block "pagination" .}}{{end}}
+
 {{end}}
 
-
+{{define "scripts"}}
+    <script src="/static/js/card.js"></script>
+    <script defer src="/static/js/home.js"></script>
+{{end}}
