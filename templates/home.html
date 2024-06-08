@@ -1,5 +1,13 @@
-<div>
-    <div class="">
-        <!--{{cards}}-->
-    </div>
+
+
+{{define "content"}}
+<div class="posts">
+
+    {{range .Data}}
+        {{block "card" .}}{{end}}
+    {{end}}
+
 </div>
+{{end}}
+
+

@@ -8,15 +8,15 @@ import (
 	"os"
 
 	"github.com/kolukattai/kblog/cmd"
-	"github.com/kolukattai/kblog/global"
-	"github.com/kolukattai/kblog/models"
+	"github.com/kolukattai/kblog/internal/global"
+	"github.com/kolukattai/kblog/internal/models"
 	"gopkg.in/yaml.v3"
 )
 
 //go:embed all:templates/*
 var templateFolder embed.FS
 
-//go:embed all:static/*
+//go:embed static/*
 var staticFiles embed.FS
 
 func init() {

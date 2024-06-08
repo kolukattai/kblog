@@ -1,0 +1,12 @@
+{{define "card"}}
+
+    <div class="post">
+        <h1>{{.Title}}</h1>
+        <div class="tags">
+            {{range split .Tags ","}}
+                <a href="#" class="/tag/{{.}}">{{.}}</a>
+            {{end}}
+        </div>
+    </div>
+
+{{end}}

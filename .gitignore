@@ -1,3 +1,5 @@
-config.yaml
 dist/
+config.yaml
 posts/
+css/
+js/

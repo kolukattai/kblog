@@ -5,15 +5,11 @@ package cmd
 
 import (
 	"fmt"
-
-	"github.com/charmbracelet/log"
-
-	"os"
 	"strings"
 
-	"github.com/kolukattai/kblog/models"
+	cmdAdd "github.com/kolukattai/kblog/internal/cmd-add"
+	"github.com/kolukattai/kblog/internal/util"
 	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v3"
 )
 
 // addCmd represents the add command
@@ -27,38 +23,11 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) < 1 {
-			log.Fatal("Prealse provide file name")
+		fmt.Println("add called")
+		if len(args) == 0 {
+			util.Error("Title is required")
 		}
-		fileName := strings.ReplaceAll(strings.Join(args, "-"), " ", "-")
-		pageData := &models.PageData{
-			Title:        strings.Join(args, " "),
-			Description:  "post description",
-			Keywords:     "one, two, three",
-			Tags:         "one, two, three",
-			Category:     "undefined",
-			Author:       "<your name>",
-			LandingImage: "",
-		}
-		yamlData, err := yaml.Marshal(pageData)
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-		data := fmt.Sprintf("---\n%s---\n\n# %s\n\npage content goes heare", string(yamlData), pageData.Title)
-		path := fmt.Sprintf("posts/%s.md", fileName)
-
-		_, err = os.Stat(path)
-
-		if err == nil {
-			log.Error("failed to create post", "err", "post with same name already exists")
-			os.Exit(1)
-		}
-
-		err = os.WriteFile(path, []byte(data), 0666)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf("%s created", path)
+		cmdAdd.Create(strings.Join(args, " "))
 	},
 }
 
