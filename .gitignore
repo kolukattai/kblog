@@ -5,3 +5,5 @@ css/
 js/
 temp/
 public/
+.DS_Store
+.vscode/settings.json
