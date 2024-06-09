@@ -35,7 +35,6 @@ to quickly create a Cobra application.`,
 
 		server.Run("8080")
 
-		fmt.Println(global.PageDataList)
 	},
 }
 

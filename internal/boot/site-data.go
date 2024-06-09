@@ -14,7 +14,6 @@ import (
 )
 
 func parseData(fileName string, c chan models.PageData) {
-	fmt.Println(fileName)
 	da, err := os.ReadFile(fmt.Sprintf("posts/%s", fileName))
 	if err != nil {
 		util.Error(err.Error())

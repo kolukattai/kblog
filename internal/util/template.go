@@ -70,8 +70,6 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *html
 
 	var result bytes.Buffer
 
-	fmt.Println(global.Categories)
-
 	err = st.templ.
 		Execute(&result, models.MDPageData{
 			Content:         template.HTML(pageContent),
@@ -79,8 +77,11 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *html
 			Data:            data,
 			DefaultMetaData: conf,
 			PageType:        st.fileType,
-			Global: struct{Tags []string; Catagories []string}{
-				Tags: global.Tags,
+			Global: struct {
+				Tags       []string
+				Catagories []string
+			}{
+				Tags:       global.Tags,
 				Catagories: global.Categories,
 			},
 		})
@@ -95,6 +96,6 @@ func (st *htmlTemplate) Result() string {
 	return st.result.String()
 }
 
-func (st *htmlTemplate) Compress() string {
-	return st.Result()
+func (st *htmlTemplate) MinifyResult() string {
+	return string(Minify().HTML([]byte(st.Result())))
 }

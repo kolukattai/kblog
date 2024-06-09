@@ -20,12 +20,12 @@
         </ul>
 
         <h1>Share</h1>
-        <ul>
-                {{if .DefaultMetaData.Instagram}} <a title="instagram" href="{{.DefaultMetaData.Instagram}}" target="_blank" class="icon"><img src="/static/icons/instagram.svg" alt="instagram"></a> {{end}}
-                {{if .DefaultMetaData.Twitter}} <a title="twitter" href="{{.DefaultMetaData.Twitter}}" target="_blank" class="icon"><img src="/static/icons/twitter.svg" height="24" alt="twitter"></a> {{end}}
-                {{if .DefaultMetaData.Facebook}} <a title="facebook" href="{{.DefaultMetaData.Facebook}}" target="_blank" class="icon"><img src="/static/icons/facebook.svg" height="24" alt="facebook"></a> {{end}}
+        <ul class="social-media">
+                {{if .DefaultMetaData.Instagram}} <a title="instagram" href="{{.DefaultMetaData.Instagram}}" target="_blank" class="icon"><img src="/static/icons/instagram.svg" height="30" alt="instagram"></a> {{end}}
+                {{if .DefaultMetaData.Twitter}} <a title="twitter" href="{{.DefaultMetaData.Twitter}}" target="_blank" class="icon"><img src="/static/icons/twitter.svg" height="30" alt="twitter"></a> {{end}}
+                {{if .DefaultMetaData.Facebook}} <a title="facebook" href="{{.DefaultMetaData.Facebook}}" target="_blank" class="icon"><img src="/static/icons/facebook.svg" height="30" alt="facebook"></a> {{end}}
 
-                <a title="copy" href="#" class="icon"><img src="/static/icons/copy.svg" height="24" alt="instagram"></a>
+                <a title="copy" onclick="copyURL()" class="icon"><img src="/static/icons/copy.svg" height="30" alt="instagram"></a>
         </ul>
     </div>
 </aside>

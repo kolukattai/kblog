@@ -30,7 +30,6 @@ func handleDataFile(w http.ResponseWriter, r *http.Request) {
 
 func handleTagDataFile(w http.ResponseWriter, r *http.Request) {
 	fileName := strings.Replace(r.URL.Path, "/data/", "", 1)
-	fmt.Println(fileName)
 	data := global.TagPageData.SiteData[fileName].GetJSON()
 	w.WriteHeader(200)
 	w.Write([]byte(data))
@@ -78,9 +77,6 @@ func tagsHandler(w http.ResponseWriter, r *http.Request) {
 
 func categoryHandler(w http.ResponseWriter, r *http.Request) {
 	tag := fmt.Sprintf("ca-%v.json", strings.ToLower(r.PathValue("category")))
-
-
-	fmt.Println(global.CategoryPageData.SiteDataFiles, tag)
 
 	dat, ok := global.CategoryPageData.SiteData[tag]
 

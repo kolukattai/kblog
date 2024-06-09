@@ -42,9 +42,9 @@ func InitTagAndCategoryData(posts *models.PageDataList, tags, category []string,
 		fileName := strings.ToLower(fmt.Sprintf("ca-%v.json", v))
 		ca.SiteData[fileName] = &models.PageDataList{}
 		ca.SiteData[fileName].ReplaceData(posts.Filter(func(item *models.PageData) bool {
-			return strings.ToLower(item.Category) == strings.ToLower(v)
+			return strings.EqualFold(item.Category, v)
 		}))
-		ca.SiteDataFiles = append(s.SiteDataFiles, fileName)
+		ca.SiteDataFiles = append(ca.SiteDataFiles, fileName)
 	}
 
 	global.TagPageData = s

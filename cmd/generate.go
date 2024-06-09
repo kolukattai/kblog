@@ -7,6 +7,8 @@ import (
 	"fmt"
 
 	"github.com/kolukattai/kblog/internal/boot"
+	"github.com/kolukattai/kblog/internal/build"
+	"github.com/kolukattai/kblog/internal/global"
 	"github.com/spf13/cobra"
 )
 
@@ -25,6 +27,13 @@ to quickly create a Cobra application.`,
 
 		boot.InitSiteData()
 
+		boot.InitJavascriptMaps(global.PageDataList, global.Config.PerPage)
+
+		boot.InitPostData(global.PageDataList, global.Config.PerPage)
+
+		boot.InitTagAndCategoryData(global.PageDataList, global.Tags, global.Categories, global.Config.PerPage)
+
+		build.Exec()
 	},
 }
 

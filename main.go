@@ -23,9 +23,16 @@ func init() {
 	global.TemplateFolder = templateFolder
 	global.StaticFiles = staticFiles
 
+	os.MkdirAll("posts", os.ModePerm)
+
 	confFile, err := os.ReadFile("config.yaml")
 	if err != nil {
-		byt, _ := yaml.Marshal(&models.Config{PerPage: 10})
+		byt, _ := yaml.Marshal(&models.Config{
+			PerPage: 10, 
+			Instagram: "https://instagram.com/mrboxopener",
+			Facebook: "https://facebook.com/mrboxopener",
+			Twitter: "https://twitter.com/mrboxopener",
+		})
 		_ = os.WriteFile("config.yaml", byt, 0666)
 		confFile = byt
 	}

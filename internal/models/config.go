@@ -2,7 +2,7 @@ package models
 
 type Config struct {
 	Version string `yaml:"version"`
-	Name    string `yaml:"Name"`
+	Name    string `yaml:"name"`
 	Logo    string `yaml:"logo"`
 	Default struct {
 		Title       string `yaml:"title"`
