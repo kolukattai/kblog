@@ -87,6 +87,11 @@ func createPages() {
 		"",
 		global.PostPageData.SiteData["0.json"].GetData(),
 		global.Config,
+		models.PageData{
+			Title: global.Config.Default.Title,
+			Description: global.Config.Default.Description,
+			Keywords: global.Config.Default.Keywords,
+		},
 	).
 		MinifyResult()
 
@@ -129,7 +134,6 @@ func createPages() {
 		_ = os.MkdirAll(fn, 0755)
 		_ = os.WriteFile(fmt.Sprintf("%s/index.html", fn), []byte(tm), 0755)
 	}
-
 
 	// categories
 

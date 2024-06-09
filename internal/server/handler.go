@@ -68,6 +68,9 @@ func tagsHandler(w http.ResponseWriter, r *http.Request) {
 		MdData("",
 			dat.GetData(),
 			global.Config,
+			models.PageData{
+				Title: "#" + strings.Replace(strings.ToUpper(tag), ".JSON", "", 1),
+			},
 		).
 		Result()
 	w.WriteHeader(200)
@@ -89,6 +92,9 @@ func categoryHandler(w http.ResponseWriter, r *http.Request) {
 		MdData("",
 			dat.GetData(),
 			global.Config,
+			models.PageData{
+				Title: strings.Replace(strings.Replace(strings.ToUpper(tag), "CA-", "", 1), ".JSON", "", 1),
+			},
 		).
 		Result()
 	w.WriteHeader(200)

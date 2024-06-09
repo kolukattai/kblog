@@ -44,7 +44,7 @@ func HtmlTemplate(folder embed.FS, fileType models.PageType, files ...string) *h
 	return &htmlTemplate{templ: tmpl, fileType: fileType}
 }
 
-func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *htmlTemplate {
+func (st *htmlTemplate) MdData(post string, data any, conf *models.Config, manualMetaData ...models.PageData) *htmlTemplate {
 	val, err := os.ReadFile(fmt.Sprintf("posts/%s.md", post))
 	if err != nil {
 		val = []byte("")
@@ -70,8 +70,7 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *html
 
 	var result bytes.Buffer
 
-	err = st.templ.
-		Execute(&result, models.MDPageData{
+	md := models.MDPageData{
 			Content:         template.HTML(pageContent),
 			MetaData:        mData,
 			Data:            data,
@@ -84,7 +83,14 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *html
 				Tags:       global.Tags,
 				Catagories: global.Categories,
 			},
-		})
+		}
+
+	for _, v := range manualMetaData {
+		md.MetaData = v
+	}
+
+	err = st.templ.
+		Execute(&result, md)
 	if err != nil {
 		Error(err.Error())
 	}

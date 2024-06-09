@@ -3,11 +3,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {{block "title" .}}{{if .MetaData.Title}}{{.MetaData.Title}}{{else}}Default Main Title{{end}}{{end}}
+        {{if .MetaData.Title}}
+            {{.DefaultMetaData.Name}} | {{.MetaData.Title}}
+        {{else}}
+            {{.DefaultMetaData.Name}} | {{.DefaultMetaData.Default.Title}}
+        {{end}}
+        
     </title>
 
-    <meta name="keywords" content="shit, poop, damn" />
-    <meta name="description" content="shit poop damn" />
+    {{if .MetaData}}
+    
+    <meta name="keywords" content="{{.MetaData.Keywords}}" />
+    <meta name="description" content="{{.MetaData.Description}}" />
+   
+    {{end}}
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
