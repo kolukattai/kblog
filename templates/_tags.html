@@ -1,0 +1,11 @@
+
+{{define "tags"}}
+
+    <div class="tags">
+        {{range .MetaData.Tags}}
+            <a class="tag" href="/tag/{{.}}">#{{.}}</a>
+        {{end}}
+    </div>
+
+{{end}}
+

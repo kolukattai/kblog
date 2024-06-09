@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -10,11 +11,9 @@ import (
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	
-
 	tm := util.HtmlTemplate(global.TemplateFolder, models.PageTypeHome, "_card", "_pagination", "_aside").
 		MdData("",
-			global.PageDataList.GetData(),
+			global.PostPageData.SiteData["0.json"].GetData(),
 			global.Config,
 		).
 		Result()
@@ -24,25 +23,78 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 func handleDataFile(w http.ResponseWriter, r *http.Request) {
 	fileName := strings.Replace(r.URL.Path, "/data/", "", 1)
-	data := global.JavaScriptLocation.SiteData[fileName].GetJSON()
+	data := global.PostPageData.SiteData[fileName].GetJSON()
+	w.WriteHeader(200)
+	w.Write([]byte(data))
+}
+
+func handleTagDataFile(w http.ResponseWriter, r *http.Request) {
+	fileName := strings.Replace(r.URL.Path, "/data/", "", 1)
+	fmt.Println(fileName)
+	data := global.TagPageData.SiteData[fileName].GetJSON()
 	w.WriteHeader(200)
 	w.Write([]byte(data))
 }
 
 func handleDataMap(w http.ResponseWriter, r *http.Request) {
-	data := global.JavaScriptLocation.GetSiteDataFilesJSON()
+	data := global.PostPageData.GetSiteDataFilesJSON()
 	w.WriteHeader(200)
 	w.Write(data)
 }
 
 func postHandler(w http.ResponseWriter, r *http.Request) {
+	slug := r.PathValue("slug")
 
+	tm := util.HtmlTemplate(global.TemplateFolder, models.PageTypePost, "_card", "_pagination", "_aside").
+		MdData(slug,
+			"",
+			global.Config,
+		).
+		Result()
+	w.WriteHeader(200)
+	w.Write([]byte(tm))
 }
 
 func tagsHandler(w http.ResponseWriter, r *http.Request) {
+	tag := fmt.Sprintf("%v.json", r.PathValue("tag"))
+
+	dat, ok := global.TagPageData.SiteData[tag]
+
+	if !ok {
+		w.WriteHeader(200)
+		w.Write([]byte("not found"))
+	}
+
+	tm := util.HtmlTemplate(global.TemplateFolder, models.PageTypeHome, "_card", "_pagination", "_aside").
+		MdData("",
+			dat.GetData(),
+			global.Config,
+		).
+		Result()
+	w.WriteHeader(200)
+	w.Write([]byte(tm))
 
 }
 
-func categoriesHandler(w http.ResponseWriter, r *http.Request) {
+func categoryHandler(w http.ResponseWriter, r *http.Request) {
+	tag := fmt.Sprintf("ca-%v.json", strings.ToLower(r.PathValue("category")))
 
+
+	fmt.Println(global.CategoryPageData.SiteDataFiles, tag)
+
+	dat, ok := global.CategoryPageData.SiteData[tag]
+
+	if !ok {
+		w.WriteHeader(200)
+		w.Write([]byte("not found"))
+	}
+
+	tm := util.HtmlTemplate(global.TemplateFolder, models.PageTypeHome, "_card", "_pagination", "_aside").
+		MdData("",
+			dat.GetData(),
+			global.Config,
+		).
+		Result()
+	w.WriteHeader(200)
+	w.Write([]byte(tm))
 }

@@ -15,8 +15,61 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0px;
 }
 
+.header__left {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background: #fff;
+}
+
+button.menu {
+    position: absolute;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: none;
+}
+
+button.menu:focus {
+    background: #fff;
+    cursor: pointer;
+}
+
+.logo {
+}
+
+
+.logo > img {
+    height: 50px;
+}
+
 .container {
     max-width: 750px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 40px 15px;
+}
+
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.site-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+footer {
+    max-width: 750px;
+    width: 100%;
     margin: 0px auto;
     padding: 40px 15px;
 }
@@ -189,16 +242,197 @@ footer {
 
 #view {
     position: absolute;
-    height: 10%;
+    bottom: 0px;
+    height: 450px;
     width: 100%;
-    background: rgb(154, 154, 154);
+    background: rgba(154, 154, 154, 0);
+}
+
+.card {
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.card > a {
+    text-decoration: none;
+}
+
+.card > a:hover {
+    text-decoration: none;
+}
+
+.card__meta-data {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    grid-template-areas: "cardcategory cardtags carddate";
+    grid-template-columns: auto 1fr 1fr;
+    margin: 10px 0;
+}
+
+.card__meta-data > .tags {
+    grid-area: cardtags;
+    flex: 1;
+}
+
+.card__category {
+    grid-area: cardcategory;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 2px;
+    outline: 2px solid #000;
+    text-decoration: none;
+}
+
+.card__category:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card__date {
+    grid-area: carddate;
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+pre {
+    padding: 10px;
+    background: #454545;
+    color: #fff;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+footer > ul > li {
+    list-style: none;
+}
+
+footer > ul > li > a {
+    display: flex;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+footer > ul > li >  a >span {
+    display: inline-block;
+    padding-left: 5px;
+}
+
+.landingImage {
+    max-width: 100%;
+}
+
+aside.drawer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    background: #fff;
+    z-index: 2;
+    padding: 40px;
+    box-sizing: border-box;
+    display: none;
+}
+
+aside.drawer > ul {
+    padding: 0px;
+}
+
+aside.drawer--show {
+    display: block;
+}
+
+aside.drawer__content {
+}
+
+.drawer__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fff;
 }
 
 @media only screen and (max-width: 500px) {
     .container {
         padding: 0px;
+        max-width: 100%;
+        overflow: hidden;
     }
     h1, h2, h3, h4, h5, p {
         margin: 15px;
     }
+
+    p {
+        padding: 10px;
+    }
+
+    main {
+        position: relative;
+        display: grid;
+        grid-template-areas: "content"
+                            "footer";
+                            margin: 0px auto;
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        width: 100vw;
+    }
+
+
+    .aside1 {
+        grid-area: aside1;
+        display: none;
+    }
+
+    .aside2 {
+        grid-area: aside2;
+        display: none;
+    }
+
+    .card__meta-data {
+        grid-template-areas: "cardcategory" 
+                            "cardtags"
+                            "carddate";
+        grid-template-columns: 1fr;
+        padding: 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .card__date {
+        grid-area: carddate;
+        text-align: left;
+    }
+    footer {
+        max-width: 100%;
+        display: block;
+        box-sizing: border-box;
+    }
+    footer ul {
+        padding-left: 0px;
+        width: 80%;
+    }
+
+    .content {
+        /* max-width: 100vw; */
+    }
+
+    button.menu {
+        display: block;
+    }
 }
+
+* {
+    /* outline: 1px solid rgba(6, 255, 6, 0.652);
+    background: rgba(6, 255, 6, 0.093); */
+}
+

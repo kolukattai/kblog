@@ -1,11 +1,23 @@
 {{define "header"}}
 
 <header>
-    <ul>
-        <li><a href="/">New Posts</a></li>
-        <li><a href="/tags">Tags</a></li>
-        <li><a href="/categories">categories</a></li>
-    </ul>
+    <div class="header__left">
+        <div class="logo">
+            <img src="/images/gopher.png" alt="logo" >
+        </div>
+    </div>
+
+    <div class="site-name">
+        {{if .DefaultMetaData.Name}}
+            {{.DefaultMetaData.Name}}
+        {{else}}
+            Default Name
+        {{end}}
+    </div>
+
+    <button class="menu" onclick="toggleMenu()">
+        <img height="40px" src="/static/icons/menu.svg" alt="menu">
+    </button>
 </header>
 
 {{end}}

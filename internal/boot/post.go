@@ -1,39 +1,19 @@
 package boot
 
 import (
-	"fmt"
 	"sync"
-	"time"
 
 	"github.com/kolukattai/kblog/internal/global"
 	"github.com/kolukattai/kblog/internal/models"
 )
 
-func splitPage(prefix, template string, index int, posts *models.PageDataList, c chan *models.KPageData, perPage int) {
-	file := fmt.Sprintf(template, prefix, index)
-	data := []*models.PageData{}
+func InitPostData(posts *models.PageDataList, perPage int) {
+	prefix := ""
+	siteData := "%v%v.json"
 
-	count := index * perPage
-
-	for i := 0; i < perPage; i++ {
-		idx := i + count
-		da := posts.Get(idx)
-		if da == nil {
-			break
-		}
-		data = append(data, da)
-	}
-
-	c <- &models.KPageData{Key: file, Value: data}
-
-}
-
-func InitJavascriptMaps(posts *models.PageDataList, perPage int) {
-	prefix := fmt.Sprintf("%v", time.Now().Nanosecond())
-	siteData := "%v-site-data-%v.json"
-
-	s := &models.JavaScript{
+	s := &models.PostPageData{
 		SiteData: map[string]*models.PageDataList{},
+		SiteDataFiles: []string{},
 	}
 
 	// files := []string{}
@@ -67,7 +47,5 @@ func InitJavascriptMaps(posts *models.PageDataList, perPage int) {
 		s.SiteDataFiles = append(s.SiteDataFiles, file.Key)
 	}
 
-	global.JavaScriptLocation = s
+	global.PostPageData = s
 }
-
-

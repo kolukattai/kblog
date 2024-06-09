@@ -26,6 +26,7 @@ func HtmlTemplate(folder embed.FS, fileType models.PageType, files ...string) *h
 		"templates/_head.html",
 		"templates/_header.html",
 		"templates/_footer.html",
+		"templates/_drawer.html",
 		fmt.Sprintf("templates/%v.html", string(fileType)),
 	}
 	if len(files) > 0 {
@@ -73,7 +74,7 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config) *html
 
 	err = st.templ.
 		Execute(&result, models.MDPageData{
-			Content:         string(pageContent),
+			Content:         template.HTML(pageContent),
 			MetaData:        mData,
 			Data:            data,
 			DefaultMetaData: conf,

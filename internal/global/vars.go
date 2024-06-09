@@ -19,6 +19,12 @@ var (
 	// static file paths
 	JavaScriptLocation = &models.JavaScript{}
 
+	PostPageData = &models.PostPageData{}
+	
+	TagPageData = &models.PostPageData{}
+	
+	CategoryPageData = &models.PostPageData{}
+
 	Tags       = []string{}
 	Categories = []string{}
 )

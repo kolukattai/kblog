@@ -1,7 +1,9 @@
 package models
 
 type Config struct {
-	Version float64 `yaml:"version"`
+	Version string `yaml:"version"`
+	Name    string `yaml:"Name"`
+	Logo    string `yaml:"logo"`
 	Default struct {
 		Title       string `yaml:"title"`
 		Description string `yaml:"description"`
@@ -12,4 +14,7 @@ type Config struct {
 	Styles          []string `yaml:"styles"`
 	Scripts         []string `yaml:"scripts"`
 	PerPage         int      `yaml:"perPage"`
+	Twitter         string   `yaml:"twitter"`
+	Facebook        string   `yaml:"facebook"`
+	Instagram       string   `yaml:"instagram"`
 }

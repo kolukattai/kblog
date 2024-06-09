@@ -7,7 +7,7 @@ import (
 type PageType string
 
 const (
-	PageTypePost       PageType = "_post"
+	PageTypePost       PageType = "post"
 	PageTypeTag        PageType = "_tag"
 	PageTypeTags       PageType = "_tags"
 	PageTypeCategory   PageType = "_category"
@@ -62,6 +62,16 @@ func (s *PageDataList) GetJSON() string {
 		panic(err)
 	}
 	return string(bData)
+}
+
+func (s *PageDataList) Filter(yield func(item *PageData) bool) []*PageData {
+	items := []*PageData{}
+	for _, v := range s.data {
+		if yield(v) {
+			items = append(items, v)
+		}
+	}
+	return items
 }
 
 type PageData struct {

@@ -1,0 +1,37 @@
+
+
+{{define "content"}}
+
+    <div class="container" id="container">
+
+        {{if .MetaData.LandingImage}} 
+            <img src="{{.MetaData.LandingImage}}" alt="landingImage" class="landingImage">
+        {{end}}
+
+        <h1 class="title">{{.MetaData.Title}}</h1>
+
+        <div class="card__meta-data">
+            <a class="card__category">
+                {{.MetaData.Category}}
+            </a>
+            <div class="tags">
+                {{range  .MetaData.Tags}}
+                    <a class="tag" href="/tag/{{.}}">#{{.}}</a>
+                {{end}}
+            </div>
+            <div class="card__date">
+                {{.MetaData.Date}}
+            </div>
+        </div>
+
+        
+        
+        {{.Content}}
+
+    </div>
+
+{{end}}
+
+{{define "scripts"}}
+<!-- script -->
+{{end}}

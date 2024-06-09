@@ -3,6 +3,7 @@ package boot
 import (
 	"fmt"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
@@ -13,6 +14,7 @@ import (
 )
 
 func parseData(fileName string, c chan models.PageData) {
+	fmt.Println(fileName)
 	da, err := os.ReadFile(fmt.Sprintf("posts/%s", fileName))
 	if err != nil {
 		util.Error(err.Error())
@@ -25,6 +27,7 @@ func parseData(fileName string, c chan models.PageData) {
 	if err != nil {
 		util.Error(err.Error())
 	}
+	frontMater.Slug = strings.Replace(fileName, ".md", "", 1)
 	c <- frontMater
 }
 

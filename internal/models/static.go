@@ -7,6 +7,7 @@ type JavaScript struct {
 	SiteDataFiles []string
 }
 
+
 func (s *JavaScript) GetSiteDataFilesJSON() []byte {
 	byt, err := json.Marshal(s.SiteDataFiles)
 	if err != nil {

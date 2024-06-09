@@ -29,7 +29,9 @@ to quickly create a Cobra application.`,
 
 		boot.InitJavascriptMaps(global.PageDataList, global.Config.PerPage)
 
-		fmt.Println(global.JavaScriptLocation.SiteDataFiles)
+		boot.InitPostData(global.PageDataList, global.Config.PerPage)
+
+		boot.InitTagAndCategoryData(global.PageDataList, global.Tags, global.Categories, global.Config.PerPage)
 
 		server.Run("8080")
 

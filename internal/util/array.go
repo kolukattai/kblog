@@ -2,6 +2,15 @@ package util
 
 import "strings"
 
+func Includes[T any](arr []T, yield func(item T, index int) bool) bool {
+	for i, v := range arr {
+		if yield(v, i) {
+			return true
+		}
+	}
+	return false
+}
+
 func RemoveDuplicate[T comparable](sliceList []T) []T {
 	allKeys := make(map[T]bool)
 	list := []T{}

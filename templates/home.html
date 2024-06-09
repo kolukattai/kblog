@@ -7,14 +7,15 @@
             {{block "card" .}}{{end}}
         {{end}}
 
-        <div id="view"></div>
     </div>
 
-    {{block "pagination" .}}{{end}}
+    <div id="view"></div>
+
+    <h1 class="text-center">End of page</h1>
 
 {{end}}
 
 {{define "scripts"}}
     <script src="/static/js/card.js"></script>
-    <script defer src="/static/js/home.js"></script>
+    <script defer src="/static/js/home-scroll.js"></script>
 {{end}}
