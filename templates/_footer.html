@@ -6,6 +6,9 @@
         {{if .DefaultMetaData.Twitter}} <li><a title="twitter" href="{{.DefaultMetaData.Twitter}}" target="_blank" class="icon"><img src="/static/icons/twitter.svg" height="35" alt="twitter"></a></li> {{end}}
         {{if .DefaultMetaData.Facebook}}  <li><a title="facebook" href="{{.DefaultMetaData.Facebook}}" target="_blank" class="icon"><img src="/static/icons/facebook.svg" height="35" alt="facebook"></a></li> {{end}}
     </ul>
+    <p class="copyright">
+        <span>&COPY; {{.Year}} {{.DefaultMetaData.DomainName}}</span>
+    </p>
 </footer>
 
 {{end}}

@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/kolukattai/kblog/internal/global"
 	"github.com/kolukattai/kblog/internal/models"
@@ -49,15 +50,8 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config, manua
 	if err != nil {
 		val = []byte("")
 	}
-	arr := strings.Split(string(val), "---")
 
-	metaData := ""
-	content := string(val)
-
-	if len(arr) == 3 {
-		metaData = arr[1]
-		content = arr[2]
-	}
+	metaData, content := GetSplitMDData(string(val))
 
 	mData := models.PageData{}
 
@@ -71,19 +65,20 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config, manua
 	var result bytes.Buffer
 
 	md := models.MDPageData{
-			Content:         template.HTML(pageContent),
-			MetaData:        mData,
-			Data:            data,
-			DefaultMetaData: conf,
-			PageType:        st.fileType,
-			Global: struct {
-				Tags       []string
-				Catagories []string
-			}{
-				Tags:       global.Tags,
-				Catagories: global.Categories,
-			},
-		}
+		Content:         template.HTML(pageContent),
+		MetaData:        mData,
+		Data:            data,
+		DefaultMetaData: conf,
+		PageType:        st.fileType,
+		Year: time.Now().String()[0:4],
+		Global: struct {
+			Tags       []string
+			Catagories []string
+		}{
+			Tags:       global.Tags,
+			Catagories: global.Categories,
+		},
+	}
 
 	for _, v := range manualMetaData {
 		md.MetaData = v
@@ -99,7 +94,9 @@ func (st *htmlTemplate) MdData(post string, data any, conf *models.Config, manua
 }
 
 func (st *htmlTemplate) Result() string {
-	return st.result.String()
+	v := st.result.String()
+	v = strings.ReplaceAll(v, "[x]", "&#x2705;")
+	return v
 }
 
 func (st *htmlTemplate) MinifyResult() string {

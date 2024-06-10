@@ -25,6 +25,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("run called")
 
+		port, _ := cmd.Flags().GetString("port")
+
 		boot.InitSiteData()
 
 		boot.InitJavascriptMaps(global.PageDataList, global.Config.PerPage)
@@ -33,7 +35,7 @@ to quickly create a Cobra application.`,
 
 		boot.InitTagAndCategoryData(global.PageDataList, global.Tags, global.Categories, global.Config.PerPage)
 
-		server.Run("8080")
+		server.Run(port)
 
 	},
 }
@@ -50,4 +52,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// runCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	runCmd.PersistentFlags().String("port", "8080", "port for the application to run")
 }

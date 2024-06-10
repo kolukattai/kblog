@@ -8,6 +8,9 @@ type MDPageData struct {
 	Data            any
 	DefaultMetaData *Config
 	PageType        PageType
+	Year            string
+	Month           string
+	Date            string
 	Global          struct {
 		Tags       []string
 		Catagories []string

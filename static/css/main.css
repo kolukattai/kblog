@@ -40,9 +40,11 @@ button.menu:focus {
     cursor: pointer;
 }
 
-.logo {
+p > code {
+    background: #d5d5d5;
+    padding: 2px 8px;
+    border-radius: 2px;
 }
-
 
 .logo > img {
     height: 50px;
@@ -302,16 +304,13 @@ footer {
 }
 
 pre {
-    padding: 10px;
+    padding: 15px;
     background: #454545;
     color: #fff;
     max-width: 100vw;
     box-sizing: border-box;
     overflow-x: auto;
-}
-
-footer {
-
+    border-radius: 4px;
 }
 
 footer > ul {
@@ -385,6 +384,11 @@ aside.drawer__content {
 .open-menu {
     overflow: hidden;
     height: 100vh;
+}
+
+.copyright {
+    text-align: center;
+    text-transform: capitalize;
 }
 
 .copied {

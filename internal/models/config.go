@@ -1,10 +1,12 @@
 package models
 
 type Config struct {
-	Version string `yaml:"version"`
-	Name    string `yaml:"name"`
-	Logo    string `yaml:"logo"`
-	Default struct {
+	Version      string `yaml:"version"`
+	Name         string `yaml:"name"`
+	Logo         string `yaml:"logo"`
+	OutputFolder string `yaml:"outputFolder"`
+	DomainName   string `yaml:"domainName"`
+	Default      struct {
 		Title       string `yaml:"title"`
 		Description string `yaml:"description"`
 		Keywords    string `yaml:"keywords"`
