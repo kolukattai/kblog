@@ -34,6 +34,8 @@ to quickly create a Cobra application.`,
 		boot.InitTagAndCategoryData(global.PageDataList, global.Tags, global.Categories, global.Config.PerPage)
 
 		build.Exec()
+
+		fmt.Printf("build generated in \"%v\"", global.Config.OutputFolder)
 	},
 }
 

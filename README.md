@@ -82,7 +82,7 @@ tags:
     - three
 category: Technology
 author: <your name>
-landingImage: https://miro.medium.com/v2/resize:fit:2000/format:webp/0*RZU7fFE4BbyEFBzX
+landingImage: /static/images/placeholder.webp
 date: Mon, 10 Jun 2024 00:51:57 IST
 ---
 

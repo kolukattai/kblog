@@ -27,7 +27,7 @@ func Create(title string) {
 		Tags:         []string{"one", "two", "three"},
 		Category:     "technology",
 		Author:       "<your name>",
-		LandingImage: "https://miro.medium.com/v2/resize:fit:2000/format:webp/0*RZU7fFE4BbyEFBzX",
+		LandingImage: "<image location>",
 		Date:         time.Now().Format(time.RFC1123),
 		Slug:         location,
 	}

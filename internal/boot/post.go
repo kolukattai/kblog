@@ -1,7 +1,6 @@
 package boot
 
 import (
-	"fmt"
 	"sync"
 
 	"github.com/kolukattai/kblog/internal/global"
@@ -13,7 +12,7 @@ func InitPostData(posts *models.PageDataList, perPage int) {
 	siteData := "%v%v.json"
 
 	s := &models.PostPageData{
-		SiteData: map[string]*models.PageDataList{},
+		SiteData:      map[string]*models.PageDataList{},
 		SiteDataFiles: []string{},
 	}
 
@@ -22,8 +21,6 @@ func InitPostData(posts *models.PageDataList, perPage int) {
 	if posts.Length()%perPage != 0 {
 		partition++
 	}
-
-	fmt.Println(partition)
 
 	var wg sync.WaitGroup
 	wg.Add(1)

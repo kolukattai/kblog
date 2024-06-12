@@ -61,7 +61,6 @@ func createPages() {
 	posts := global.PageDataList.GetData()
 
 	for _, v := range posts {
-		fmt.Println(v.Slug)
 		tm := util.
 			HtmlTemplate(
 				global.TemplateFolder,
@@ -110,7 +109,6 @@ func createPages() {
 	for _, v := range f1 {
 		fn := fmt.Sprintf("%s/data/%s", global.Config.OutputFolder, v)
 		da, ok := global.PostPageData.SiteData[v]
-		fmt.Println(fn, ok, da)
 		if !ok {
 			continue
 		}
@@ -122,7 +120,6 @@ func createPages() {
 	f2 := global.TagPageData.SiteDataFiles
 
 	for _, v := range f2 {
-		fmt.Println(v)
 		fn := fmt.Sprintf("%s/tag/%s/", global.Config.OutputFolder, strings.Replace(v, ".json", "", 1))
 		dat, ok := global.TagPageData.SiteData[v]
 		if !ok {
@@ -142,8 +139,6 @@ func createPages() {
 	// categories
 
 	f3 := global.CategoryPageData.SiteDataFiles
-
-	fmt.Println(f3)
 
 	for _, v := range f3 {
 		fn := fmt.Sprintf("%s/category/%s/", global.Config.OutputFolder, strings.Replace(strings.Replace(v, ".json", "", 1), "ca-", "", 1))

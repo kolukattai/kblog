@@ -36,6 +36,6 @@ func Run(port string) {
 	http.Handle("GET /category/{category}", http.HandlerFunc(categoryHandler))
 
 	p := fmt.Sprintf(":%s", port)
-	fmt.Printf("sight stated at http://localhost%s\n", p)
+	fmt.Printf("server stated at http://localhost%s\n", p)
 	log.Fatal(http.ListenAndServe(p, nil))
 }
