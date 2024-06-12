@@ -15,13 +15,8 @@ import (
 // previewCmd represents the preview command
 var previewCmd = &cobra.Command{
 	Use:   "preview",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "preview the generate html page in given port or default port 3333",
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		port, _ := cmd.Flags().GetString("port")
 
