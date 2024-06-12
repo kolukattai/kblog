@@ -13,7 +13,7 @@ use the following command to install kblog
 ```
 to create a blog first create a empty folder and run the following command followed by your post title, post title can have space in between them
 ```sh
-    kblog add my first post
+    kblog post my first post
 ```
 
 this will create a project folder structure this
