@@ -9,7 +9,7 @@ a simple static sight generator for blogging
 ## getting started
 use the following command to install kblog
 ```sh
-    go install github.com/kolukattai/kblog
+    go install github.com/kolukattai/kblog@latest
 ```
 to create a blog first create a empty folder and run the following command followed by your post title, post title can have space in between them
 ```sh
