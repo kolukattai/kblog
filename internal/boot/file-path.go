@@ -69,5 +69,3 @@ func InitJavascriptMaps(posts *models.PageDataList, perPage int) {
 
 	global.JavaScriptLocation = s
 }
-
-

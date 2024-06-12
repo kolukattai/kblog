@@ -49,6 +49,7 @@ func init() {
 	}
 	global.Config = &conf
 }
+
 func main() {
 	cmd.Execute()
 }

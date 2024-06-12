@@ -1,6 +1,7 @@
 package boot
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/kolukattai/kblog/internal/global"
@@ -21,6 +22,8 @@ func InitPostData(posts *models.PageDataList, perPage int) {
 	if posts.Length()%perPage != 0 {
 		partition++
 	}
+
+	fmt.Println(partition)
 
 	var wg sync.WaitGroup
 	wg.Add(1)

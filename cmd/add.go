@@ -4,7 +4,6 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"strings"
 
 	cmdAdd "github.com/kolukattai/kblog/internal/cmd-add"
@@ -23,7 +22,6 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
 		if len(args) == 0 {
 			util.Error("Title is required")
 		}
