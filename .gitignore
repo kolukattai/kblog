@@ -1,8 +1,6 @@
 dist/
 config.yaml
 posts/
-css/
-js/
 temp/
 public/
 .DS_Store
