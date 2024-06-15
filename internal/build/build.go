@@ -51,6 +51,11 @@ func copyAssets(t copyAssetsType, path string, target string) {
 			if strings.Contains(dirPath, ".css") {
 				da = util.Minify().Css(da)
 			}
+			if strings.Contains(dirPath, ".js") {
+				if len(global.Config.GoogleAnalytics) != 0 && file.Name() == "ga.js" {
+					da = []byte(strings.Replace(string(da), "{{ga_id}}", global.Config.GoogleAnalytics, 1))
+				}
+			}
 			_ = os.WriteFile(fmt.Sprintf("%s/%s", target, dirPath), da, 0666)
 		}
 	}
