@@ -1,0 +1,32 @@
+.footer {
+    grid-area: footer;
+    padding: 20px;
+    background: #fafafa;
+    border-top: 1px solid rgb(178, 178, 178);
+    &__group {
+
+    }
+    &__social-media {
+        display: flex;
+        padding-left: 0px;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0px auto;
+        li {
+            list-style: none;
+            a {
+                display: inline-block;
+                padding: 5px;
+                border: 2px solid #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 4px;
+            }
+        }
+    }
+    .copyright {
+        padding: 50px 10px;
+        text-align: center;
+    }
+}

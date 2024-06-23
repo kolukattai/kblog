@@ -1,0 +1,46 @@
+.drawer {
+    position: fixed;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    display: none;
+    &--show {
+        display: block;
+    }
+    &__close {
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 4px;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        border: 0px;
+        img {
+            height: 30px;
+            width: 30px;
+        }
+    }
+    &__content {
+        padding: 20px;
+        ul {
+            padding: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            li {
+                list-style: none;
+                a {
+                    text-transform: capitalize;
+                    padding: 2px 5px;
+                    margin: 0px 4px;
+                    background-color: #dcdcdc;
+                    color: #000;
+                }
+            }
+        }
+    }
+}

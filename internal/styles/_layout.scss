@@ -1,0 +1,93 @@
+@use "breakpoints";
+
+.main {
+    position: relative;
+    display: grid;
+    grid-template-areas: "header header header"
+    "aside-left main-content aside-right"
+    "footer footer footer";
+    grid-template-columns: .5fr 1.5fr .5fr;
+    @include breakpoints.max-width {
+        grid-template-areas: "header" "main-content" "footer";
+        grid-template-columns: 1fr;
+    }
+
+    .aside-left {
+        grid-area: aside-left;
+        padding-top: 20px;
+        max-height: min-content;
+        @include breakpoints.max-width {
+            display: none;
+        }
+        .content {
+            position: sticky;
+            top: 80px;
+            float: right;
+            h1 {
+                padding: 10px 0px;
+                text-transform: uppercase;
+            }
+            ul {
+                max-width: 220px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: start;
+                padding-left: 0px;
+                margin: 0px;
+                margin-top: 5px;
+                margin-bottom: 30px;
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    a.link {
+                        text-transform: uppercase;
+                        display: inline-block;
+                        padding: 4px 8px;
+                        border-radius: 2px;
+                        outline: 1px solid rgb(0, 204, 255);
+                        margin: 4px;
+                        padding: 4px;
+                        cursor: pointer;
+                        text-decoration: none;
+                        border: 1px solid rgba(212, 212, 212, 0.529);
+                        &:hover {
+                            text-decoration: none;
+                            background: #00ff8433;
+                        }
+                    }
+                }
+                &.group {
+                    li {
+                        a, span {
+                            padding: 5px;
+                            border: 1px solid gray;
+                            border-radius: 4px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-right: 5px;
+                            cursor: pointer;
+                            &:hover {
+                                background: #00ff8433;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main-content {
+        grid-area: main-content;
+        width: 100%;
+        img {
+            max-width: 100%;
+        }
+    }
+    .aside-right {
+        @include breakpoints.max-width {
+            display: none;
+        }
+        grid-area: aside-right;
+    }
+}

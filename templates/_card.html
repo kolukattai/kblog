@@ -3,21 +3,25 @@
     <div class="card">
         <a href="/post/{{.Slug}}">
             <img src="{{.LandingImage}}" alt="landing img">
-            <h1>{{.Title}}</h1>
         </a>
         <div class="card__meta-data">
             <a class="card__category">
                 {{.Category}}
             </a>
-            <div class="tags">
-                {{range  .Tags}}
-                    <a class="tag" href="/tag/{{.}}">#{{.}}</a>
-                {{end}}
-            </div>
             <div class="card__date">
                 {{.Date}}
             </div>
+            <!-- <div class="tags">
+                {{range  .Tags}}
+                    <a class="tags__tag" href="/tag/{{.}}">#{{.}}</a>
+                {{end}}
+            </div> -->
         </div>
+        <h1>{{.Title}}</h1>
+
+        <p class="card__meta-data__description">
+            {{.Description}}
+        </p>
 
     </div>
 

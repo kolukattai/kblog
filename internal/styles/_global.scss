@@ -1,0 +1,39 @@
+
+* {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}  
+
+
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    color: rgb(0, 128, 255);
+    font-weight: 500;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+
+.copied {
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 2px;
+    z-index: 4;
+    transition: .2s;
+    transform: translateX(-110px);
+    &--show {
+        transform: translateX(0px);
+    }
+}
+
+

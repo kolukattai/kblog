@@ -1,6 +1,6 @@
 {{define "header"}}
 
-<header>
+<header class="header">
     <div class="header__left">
         <a href="/" class="logo">
             {{if .DefaultMetaData.Logo}}
@@ -11,7 +11,7 @@
         </a>
     </div>
 
-    <div class="site-name">
+    <div class="header__middle">
         {{if .DefaultMetaData.Name}}
             {{.DefaultMetaData.Name}}
         {{else}}
@@ -19,8 +19,8 @@
         {{end}}
     </div>
 
-    <button class="menu" onclick="toggleMenu()">
-        <img height="40px" src="/static/icons/menu.svg" alt="menu">
+    <button class="header__right menu">
+        <img src="/static/icons/menu.svg" alt="menu">
     </button>
 </header>
 

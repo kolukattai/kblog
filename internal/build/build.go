@@ -159,11 +159,27 @@ func createPages() {
 	})
 }
 
+func generateSitemap(domain string, data []*models.PageData) {
+
+	list := ""
+	for _, v := range data {
+		list += fmt.Sprintf("<url><loc>https://%s/post/%s/</loc><lastmod>%s</lastmod></url>",
+			domain, v.Slug, v.Date,
+		)
+	}
+	templ := fmt.Sprintf(`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+	%s
+	</urlset>`, list)
+
+	_ =os.WriteFile(fmt.Sprintf("%s/posts.xml", global.Config.OutputFolder), []byte(templ), 0755)
+}
+
 func Exec() {
 	os.RemoveAll(global.Config.OutputFolder)
 
 	copyAssets(copyAssetsTypeEmbedded, "static", global.Config.OutputFolder)
 	copyAssets(copyAssetsTypeLocal, "public", global.Config.OutputFolder)
 	createPages()
-
+	util.GenerateRobtTxt(global.Config.DomainName, global.Config.OutputFolder)
+	generateSitemap(global.Config.DomainName, global.PageDataList.GetData())
 }
