@@ -47,5 +47,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// runCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	runCmd.PersistentFlags().String("port", "8080", "port for the application to run")
+	runCmd.Flags().String("port", "8080", "port for the application to run")
 }

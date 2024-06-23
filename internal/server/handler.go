@@ -15,6 +15,11 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		MdData("",
 			global.PostPageData.SiteData["0.json"].GetData(),
 			global.Config,
+			models.PageData{
+				Title:        "Recent Posts",
+				Description:  global.Config.Default.Description,
+				LandingImage: global.Config.LandingImage,
+			},
 		).
 		Result()
 	w.WriteHeader(200)

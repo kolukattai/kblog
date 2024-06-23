@@ -5,8 +5,10 @@
     <title>
         {{if .MetaData.Title}}
             {{.DefaultMetaData.Name}} | {{.MetaData.Title}}
-        {{else}}
+        {{else if .DefaultMetaData.Default}}
             {{.DefaultMetaData.Name}} | {{.DefaultMetaData.Default.Title}}
+        {{else}}
+            {{.DefaultMetaData.Name}}
         {{end}}
         
     </title>
@@ -15,14 +17,21 @@
     
     <meta name="keywords" content="{{.MetaData.Keywords}}" />
     <meta name="description" content="{{.MetaData.Description}}" />
+
+    <meta property="og:title" content="{{.MetaData.Title}}" />
+    <meta property="og:description" content="{{.MetaData.Description}}" />
+    <meta property="og:image" content="{{.MetaData.LandingImage}}" />
+
    
     {{end}}
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/header.css">
+    <!-- <link rel="stylesheet" href="/static/css/main.css"> -->
+    <!-- <link rel="stylesheet" href="/static/css/header.css"> -->
+    <!-- <link rel="stylesheet" href="/static/ca/main.css"> -->
+    <link rel="stylesheet" href="/public/css/main.css">
 
     {{range .DefaultMetaData.Styles}}
         <link rel="stylesheet" href="/public/css/{{.}}">

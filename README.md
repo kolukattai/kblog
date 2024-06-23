@@ -34,17 +34,17 @@ PATH="$GOPATH/bin:$PATH"
 ```
 
 ## Features offers
-- [x] home page
-- [ ] lazy loading post
-- [x] post page
-- [x] tag page
-- [x] category page
+- [x] Home page
+- [x] Lazy loading post
+- [x] Post page
+- [x] Tag page
+- [x] Category page
 - [x] SocialMedia Share
 
-| name | age |
-| -- | -- |
-| some name | 3 |
-| some name 2 | 3 |
+- [x] Google Analytics
+- [x] Design Revamp
+- [x] Adding Robots.txt and sitemap files for build
+- [x] faster build
 
 
 ## config.yaml file

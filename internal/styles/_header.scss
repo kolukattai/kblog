@@ -1,0 +1,46 @@
+@use "breakpoints";
+
+
+.header {
+    display: grid;
+    grid-template-areas: "header-left header-middle header-right";
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 10px 1px gray;
+    position: sticky;
+    top: 0px;
+    background: #fff;
+    z-index: 1;
+    grid-area: header;
+    &__left {
+        grid-area: header-left;
+        background: #fff;
+    }
+
+    &__middle {
+        grid-area: header-middle;
+    }
+
+    &__right {
+        padding: 5px;
+        margin-right: 10px;
+        grid-area: header-right;
+        background: #fff;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        display: none;
+        @include breakpoints.max-width {
+            display: flex;
+        }
+        img {
+            height: 35px;
+            cursor: pointer;
+        }
+
+        &:focus {
+            background: #fff;
+            cursor: pointer;
+        }
+    }
+}

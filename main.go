@@ -28,10 +28,10 @@ func init() {
 	confFile, err := os.ReadFile("config.yaml")
 	if err != nil {
 		byt, _ := yaml.Marshal(&models.Config{
-			PerPage:   10,
-			Instagram: "https://instagram.com/mrboxopener",
-			Facebook:  "https://facebook.com/mrboxopener",
-			Twitter:   "https://twitter.com/mrboxopener",
+			PerPage:    10,
+			Instagram:  "https://instagram.com/mrboxopener",
+			Facebook:   "https://facebook.com/mrboxopener",
+			Twitter:    "https://twitter.com/mrboxopener",
 			DomainName: "domain.com",
 		})
 		_ = os.WriteFile("config.yaml", byt, 0666)

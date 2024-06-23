@@ -1,29 +1,27 @@
 {{define "aside1"}}
 
-<aside class="aside1">
+<aside class="aside-left">
     <div class="content">
         <h1>Tags</h1>
-        <ul>
+        <div class="tags">
             {{range .Global.Tags}}
-                <li><a href="/tag/{{.}}">#{{.}}</a></li>
+                <a class="tags__tag" href="/tag/{{.}}">#{{.}}</a>
             {{end}}
-        </ul>
+        </div>
         
         <h1>Categories</h1>
-        <ul>
+        <ul class="group">
             {{range .Global.Catagories}}
-                <li><a href="/category/{{.}}">{{.}}</a></li>
+                <li><a class="link" href="/category/{{.}}">{{.}}</a></li>
             {{end}}
         </ul>
 
         <h1>Share</h1>
-        <ul>
-            <li>
-                {{if .DefaultMetaData.Instagram}} <li> <a title="instagram" href="{{.DefaultMetaData.Instagram}}" target="_blank" class="icon"><img src="/static/icons/instagram.svg" alt="instagram"></a></li> {{end}}
-                {{if .DefaultMetaData.Twitter}} <li> <a title="twitter" href="{{.DefaultMetaData.Twitter}}" target="_blank" class="icon"><img src="/static/icons/twitter.svg" height="24" alt="twitter"></a></li> {{end}}
-                {{if .DefaultMetaData.Facebook}} <li> <a title="facebook" href="{{.DefaultMetaData.Facebook}}" target="_blank" class="icon"><img src="/static/icons/facebook.svg" height="24" alt="facebook"></a></li> {{end}}
-                <li><span onclick="copyURL()" title="copy" class="icon"><img src="/static/icons/copy.svg" height="24" alt="instagram"></span></li>
-            </li>
+        <ul class="group">
+            {{if .DefaultMetaData.Instagram}} <li> <a title="instagram" href="{{.DefaultMetaData.Instagram}}" target="_blank" class="icon"><img src="/static/icons/instagram.svg" alt="instagram"></a></li> {{end}}
+            {{if .DefaultMetaData.Twitter}} <li> <a title="twitter" href="{{.DefaultMetaData.Twitter}}" target="_blank" class="icon"><img src="/static/icons/twitter.svg" height="24" alt="twitter"></a></li> {{end}}
+            {{if .DefaultMetaData.Facebook}} <li> <a title="facebook" href="{{.DefaultMetaData.Facebook}}" target="_blank" class="icon"><img src="/static/icons/facebook.svg" height="24" alt="facebook"></a></li> {{end}}
+            <li><span onclick="copyURL()" title="copy" class="icon"><img src="/static/icons/copy.svg" height="24" alt="instagram"></span></li>
         </ul>
     </div>
 </aside>
@@ -34,7 +32,7 @@
 
 {{define "aside2"}}
 
-<aside class="aside2">
+<aside class="aside-right">
    
 </aside>
 

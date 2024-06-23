@@ -1,0 +1,11 @@
+@mixin min-width() {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin max-width() {
+    @media (max-width: 992px) {
+        @content;
+    }
+}

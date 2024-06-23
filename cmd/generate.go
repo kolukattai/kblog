@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/kolukattai/kblog/internal/boot"
 	"github.com/kolukattai/kblog/internal/build"
@@ -20,6 +21,8 @@ var generateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("generating static files")
 
+		t := time.Now()
+
 		boot.InitSiteData()
 
 		boot.InitJavascriptMaps(global.PageDataList, global.Config.PerPage)
@@ -30,7 +33,9 @@ var generateCmd = &cobra.Command{
 
 		build.Exec()
 
-		fmt.Printf("build generated in \"%v\"", global.Config.OutputFolder)
+		since := time.Since(t)
+
+		fmt.Printf("build generated in %v\n", since)
 	},
 }
 

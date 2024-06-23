@@ -1,7 +1,7 @@
 {{define "footer"}}
 
-<footer>
-    <ul>
+<footer class="footer">
+    <ul class="footer__social-media">
         {{if .DefaultMetaData.Instagram}} <li><a title="instagram" href="{{.DefaultMetaData.Instagram}}" target="_blank" class="icon"><img src="/static/icons/instagram.svg" height="35" alt="instagram"></a></li> {{end}}
         {{if .DefaultMetaData.Twitter}} <li><a title="twitter" href="{{.DefaultMetaData.Twitter}}" target="_blank" class="icon"><img src="/static/icons/twitter.svg" height="35" alt="twitter"></a></li> {{end}}
         {{if .DefaultMetaData.Facebook}}  <li><a title="facebook" href="{{.DefaultMetaData.Facebook}}" target="_blank" class="icon"><img src="/static/icons/facebook.svg" height="35" alt="facebook"></a></li> {{end}}

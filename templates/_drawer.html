@@ -1,7 +1,14 @@
 {{define "drawer"}}
 
 <aside class="drawer" id="drawer">
-    <button class="drawer__close" onclick="toggleMenu()">
+    <a class="logo" href="/">
+        {{if .DefaultMetaData.Logo}}
+            <img src="{{.DefaultMetaData.Logo}}" alt="logo" >
+        {{else}}
+            <img src="/static/images/logo.png" alt="logo" >
+        {{end}}
+    </a>
+    <button class="drawer__close menu">
         <img height="50" src="/static/icons/close.svg" alt="close">
     </button>
     <div class="drawer__content">
