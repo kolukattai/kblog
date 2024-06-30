@@ -44,8 +44,8 @@ PATH="$GOPATH/bin:$PATH"
 - [x] Google Analytics
 - [x] Design Revamp
 - [x] Adding Robots.txt and sitemap files for build
-- [x] faster build
-
+- [x] faster compile time
+- [x] social media post preview
 
 ## config.yaml file
 config file is made in such a way that it is self explanatory, the only thing that is missing here is that the `public` folder will be the static assets folder, meaning all the static assets will be store inside this folder in order for the sight to access it

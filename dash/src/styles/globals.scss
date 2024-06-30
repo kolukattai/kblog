@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.default-layout {
+  display: grid;
+  grid-template-areas: "drawer main";
+  grid-template-columns: 200px 1fr;
+  .drawer {
+    grid-area: drawer;
+    height: 100vh;
+    position: sticky;
+    top: 0px;
+    border-right: 2px solid rgb(217, 217, 217);
+  }
+  .main {
+    grid-area: main;
+    padding: 30px;
+    background: #fafafa;
+  }
+}

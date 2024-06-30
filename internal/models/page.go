@@ -56,6 +56,15 @@ func (s *PageDataList) Get(index int) *PageData {
 	return s.data[index]
 }
 
+func (s *PageDataList) GetOneBySlug(slug string) *PageData {
+	for _, v := range s.data {
+		if v.Slug == slug {
+			return v
+		}
+	}
+	return nil
+}
+
 func (s *PageDataList) GetJSON() string {
 	bData, err := json.Marshal(s.data)
 	if err != nil {
@@ -84,4 +93,9 @@ type PageData struct {
 	LandingImage string   `yaml:"landingImage" json:"landingImage"`
 	Date         string   `yaml:"date" json:"date"`
 	Slug         string   `yaml:"-" json:"slug,omitempty"`
+}
+
+func (st *PageData) JSON() string {
+	byt, _ := json.Marshal(st)
+	return string(byt)
 }
